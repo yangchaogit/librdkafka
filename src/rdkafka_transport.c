@@ -985,11 +985,11 @@ static void rd_kafka_transport_io_event (rd_kafka_transport_t *rktrans,
 			/* Connect failed */
                         errno = r;
 			rd_snprintf(errstr, sizeof(errstr),
-				    "Connect to %s failed: %s",
+				    "Connect to %s failed: %s line: %d",
                                     rd_sockaddr2str(rkb->rkb_addr_last,
                                                     RD_SOCKADDR2STR_F_PORT |
                                                     RD_SOCKADDR2STR_F_FAMILY),
-                                    rd_strerror(r));
+                                    rd_strerror(r), __LINE__);
 
 			rd_kafka_transport_connect_done(rktrans, errstr);
 		} else {
@@ -1230,12 +1230,12 @@ int rd_kafka_transport_poll(rd_kafka_transport_t *rktrans, int tmout) {
 			char errstr[512];
 			errno = r;
 			rd_snprintf(errstr, sizeof(errstr),
-				    "Connect to %s failed: %s",
+				    "Connect to %s failed: %s line: %d",
 				    rd_sockaddr2str(rktrans->rktrans_rkb->
 						    rkb_addr_last,
 						    RD_SOCKADDR2STR_F_PORT |
                                                     RD_SOCKADDR2STR_F_FAMILY),
-                                    socket_strerror(r));
+                                    socket_strerror(r), __LINE__);
 			rd_kafka_transport_connect_done(rktrans, errstr);
 			return -1;
 		} else
