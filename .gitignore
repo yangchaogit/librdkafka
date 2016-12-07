@@ -25,3 +25,7 @@ gmon.out
 *.rpm
 staging-docs
 tmp
+cscope.in.out
+cscope.out
+cscope.po.out
+tags
